@@ -24,4 +24,7 @@ The Plugin will get a User Object and a Textchannel object.
 
 #User
 A user has 0 or more server, an ID, privileges per Server. It will be saved in a database. If no database is available, fallback to file storage.
+![database data layout](documents/database/data.png)
+
+
 
