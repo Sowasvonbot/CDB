@@ -12,6 +12,15 @@ repositories {
     mavenCentral()
 }
 
+compileJava{
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath
+        ]
+    }
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.13.3'
