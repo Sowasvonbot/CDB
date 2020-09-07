@@ -24,6 +24,19 @@ public class PermissionCollection {
 
     }
 
+    public PermissionCollection(long calcInt){
+        this();
+        long temp;
+        for (int i = Permission.values().length-1; i >= 0 ; i--) {
+            temp = Math.round(Math.pow(2,i));
+            if (temp <= calcInt) {
+                calcInt = calcInt - temp;
+                this.setPermission(Permission.values()[i], true);
+            }
+            //No need to set to false with else block, cause all are false per default.
+        }
+    }
+
     /**
      * Set the boolean of a given permission
      * @param permission enum of the permission
@@ -42,12 +55,35 @@ public class PermissionCollection {
         return  myPermissions.get(permission);
     }
 
+    public long toLong(){
+        return PermissionCollection.permissionCollectionToLong(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) return true;
+        if(!(obj instanceof PermissionCollection)) return false;
+
+        for(Permission permission : Permission.values()){
+            if(this.getPermission(permission)!=((PermissionCollection) obj).getPermission(permission)) return false;
+        }
+        return true;
+    }
+
     /**
      * Returns a list of all possible Permissions in the discord universe
      * @return the List with all permissions as enums
      */
     public static List<Permission> getPermissionList(){
         return Arrays.asList(Permission.values());
+    }
+
+    public static long permissionCollectionToLong(PermissionCollection permissionCollection){
+        long result = 0;
+        for(int i = 0; i < Permission.values().length; i++){
+            result = result + (permissionCollection.getPermission(Permission.values()[i]) ? 1:0) * Math.round(Math.pow(2,i));
+        }
+        return result;
     }
     
 

@@ -16,8 +16,8 @@ public class Server {
 
     private String serverName;
     private Long id;
-    private Map<User, UserServerData> users;
 
+    private List<User> users;
     private List<Role> roles;
     private List<TextChannel> textChannels;
     private List<VoiceChannel> voiceChannels;
