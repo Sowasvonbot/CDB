@@ -24,13 +24,19 @@ public class PermissionCollection {
 
     }
 
-    public PermissionCollection(long calcInt){
+    /**
+     * Constructs a permission collection from a permission long, when the calcLong is invalid, some not predictable will happen.
+     * Use the {@link #toLong() toLong} or {@link #permissionCollectionToLong(PermissionCollection) permissionCollectionToLong} method
+     * for getting a calcLong.
+     * @param calcLong from the methods mentioned above calculated long
+     */
+    public PermissionCollection(long calcLong){
         this();
         long temp;
         for (int i = Permission.values().length-1; i >= 0 ; i--) {
             temp = Math.round(Math.pow(2,i));
-            if (temp <= calcInt) {
-                calcInt = calcInt - temp;
+            if (temp <= calcLong) {
+                calcLong = calcLong - temp;
                 this.setPermission(Permission.values()[i], true);
             }
             //No need to set to false with else block, cause all are false per default.
@@ -55,6 +61,11 @@ public class PermissionCollection {
         return  myPermissions.get(permission);
     }
 
+
+    /**
+     * Represents this Permission Collection as Long
+     * @return long, one number, which can be recalculated to a {@link PermissionCollection PermissionCollection}
+     */
     public long toLong(){
         return PermissionCollection.permissionCollectionToLong(this);
     }
@@ -78,6 +89,12 @@ public class PermissionCollection {
         return Arrays.asList(Permission.values());
     }
 
+
+    /**
+     * Represents a given Permission Collection as Long
+     * @param permissionCollection the Permission Collection to represent
+     * @return long, one number, which can be recalculated to a {@link PermissionCollection PermissionCollection}
+     */
     public static long permissionCollectionToLong(PermissionCollection permissionCollection){
         long result = 0;
         for(int i = 0; i < Permission.values().length; i++){
@@ -85,9 +102,11 @@ public class PermissionCollection {
         }
         return result;
     }
-    
 
 
+    /**
+     * All possible Permissions.
+     */
     protected enum Permission{
         CREATE_INSTANT_INVITE, KICK_MEMBERS, BAN_MEMBERS, ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_GUILD, ADD_REACTIONS,
         VIEW_AUDIT_LOG, PRIORITY_SPEAKER, STREAM, VIEW_CHANNEL, SEND_MESSAGES, SEND_TTS_MESSAGES, MANAGE_MESSAGES,
