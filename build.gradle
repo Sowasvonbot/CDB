@@ -11,6 +11,7 @@ mainClassName = "de.tk_industries.cdb.Main"
 repositories {
     mavenCentral()
     jcenter()
+
 }
 
 compileJava{
@@ -25,6 +26,10 @@ compileJava{
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.13.3'
-    compile("net.dv8tion:JDA:4.2.0_168")
+    compile("net.dv8tion:JDA:4.2.0_168"){
+        exclude module: 'opus-java'
+    }
+    compile 'club.minnced:opus-java-api:1.0.5'
+    compile 'club.minnced:opus-java-natives:1.0.5'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

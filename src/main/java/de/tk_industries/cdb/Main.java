@@ -14,5 +14,6 @@ public class Main {
         logger.info("Hello World");
         logger.info(PermissionCollection.getPermissionList().toString());
 
+        logger.info(Bot.getInstance().getUserByID(673950824287830047L).getTag());
     }
 }
