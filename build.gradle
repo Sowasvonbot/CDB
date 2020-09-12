@@ -26,7 +26,7 @@ compileJava{
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.13.3'
-    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
     compile("net.dv8tion:JDA:4.2.0_168"){
         exclude module: 'opus-java'
     }
